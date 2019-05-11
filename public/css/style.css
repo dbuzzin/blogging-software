@@ -13,3 +13,12 @@ body {
 .ui.segment {
     margin: 1rem auto;
 }
+
+#likeNum,
+#dislikeNum {
+    margin-left: 10px;
+}
+
+.fl-r {
+    float: right;
+}

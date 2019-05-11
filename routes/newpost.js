@@ -19,7 +19,7 @@ router.post("/posts/new", (req, res) => {
             console.log("Error: ", err);
         } else {
             console.log("Added New Post");
-            res.redirect(`/posts/${post.year}/${post.month}/${post.day}/${post.title.replace(/\s/g, "-")}`);
+            res.redirect(`/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}`);
         }
     });
 });

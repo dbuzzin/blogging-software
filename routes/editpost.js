@@ -25,17 +25,20 @@ router.put("/posts/:year/:month/:day/:title", (req, res) => {
 
     let findPost = {
         title   : req.params.title.replace(/[-]/gi, " "),
-        year    : req.params.year,
-        month   : req.params.month,
-        day     : req.params.day
+        created : {
+            year    : req.params.year,
+            month   : req.params.month,
+            day     : req.params.day
+        }   
     }
 
     Post.findOneAndUpdate(findPost, getPost, (err, post) => {
         if(err) {
             console.log("Error: ", err);
-            res.redirect("/posts/:id/edit");
+            res.redirect(`/posts/${post._id}/edit`);
         } else {
-            res.redirect(`/`);
+            console.log(post);
+            res.redirect(`/posts/${post.created.year}/${post.created.month}/${post.created.day}/${getPost.title.replace(/\s/g, "-")}`);
         }
     });
 

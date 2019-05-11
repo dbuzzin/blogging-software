@@ -18,6 +18,7 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(methodOver("_method"));
 app.use(sanitizer());
@@ -48,6 +49,7 @@ app.use(require("./routes/newpost"));
 app.use(require("./routes/viewpost"));
 app.use(require("./routes/editpost"));
 app.use(require("./routes/deletepost"));
+app.use(require("./routes/likepost"));
 
 
 

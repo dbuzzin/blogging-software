@@ -5,10 +5,15 @@ const mongoose = require("mongoose"),
       postSchema = new mongoose.Schema({
           title     : String,
           body      : String,
-          created   : {type: Date, default: Date.now},
-          year      : {type: String, default: date.getFullYear()},
-          month     : {type: String, default: String(date.getMonth() + 1).replace(/^(\d)$/, "0$1")},
-          day       : {type: String, default: String(date.getDate()).replace(/^(\d)$/, "0$1")}
+          created   : {
+            fulldate  : {type: Date, default: Date.now},
+            year      : {type: String, default: date.getFullYear()},
+            month     : {type: String, default: String(date.getMonth() + 1).replace(/^(\d)$/, "0$1")},
+            day       : {type: String, default: String(date.getDate()).replace(/^(\d)$/, "0$1")},
+          },
+          likes     : {type: Number, default: 0},
+          dislikes  : {type: Number, default: 0}
+
       });
 
 module.exports = mongoose.model("Post", postSchema);

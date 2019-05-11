@@ -9,7 +9,7 @@
         <p><%- post.body.substring(0, 3000) %></p>
 
         <div class="ui center aligned basic segment">
-            <a href="<%= `/posts/${post.year}/${post.month}/${post.day}/${post.title.replace(/\s/g, "-")}` %>">
+            <a href="<%= `/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}` %>">
                 <button class="ui button primary">Read More</button>
             </a>
         </div>

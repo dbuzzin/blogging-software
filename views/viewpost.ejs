@@ -1,15 +1,38 @@
 <% include ./partials/header %>
 
-<h1><%= post.title.titleCase() %></h1>
+<meta property="og:type"        content="article:test" />
+<meta property="og:title"       content="<%= post.title.titleCase() %>" />
+<meta property="og:description" content="<%- post.body.substring(0, 50) %>" />
 
-<p><%- post.body %></p>
+<div class="ui main very padded text w-70 segment">
 
-<a href="/posts/<%= post._id %>/edit">
-    <button class="ui button orange">Edit</button>
-</a>
+    <h1><%= post.title.titleCase() %></h1>
 
-<form class="ib" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-    <button class="ui button red">Delete</button>
-</form>
+    <p><%- post.body %></p>
+
+    <div>
+        <a href="/posts/<%= post._id %>/edit">
+            <button class="ui button orange">Edit</button>
+        </a>
+        <form class="ib" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+            <button class="ui button red">Delete</button>
+        </form>
+        <div class="fl-r">
+            <button id="likeBtn" class="ui button">Like <span id="likeNum"><%= post.likes %></span></button>
+            <button id="dislikeBtn" class="ui button">Dislike <span id="dislikeNum"><%= post.dislikes %></span></button>
+        </div>
+    </div>
+
+    <%# <div class="fb-share-button" data-href="http://localhost:3000/posts/2019/05/11/test-post-1" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fposts%2F2019%2F05%2F11%2Ftest-post-1&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div> %>
+
+</div>
+
+<script>
+
+    let postID = "<%= post._id %>";
+
+</script>
+
+<script src="/js/handle-requests.js"></script>
 
 <% include ./partials/footer %>
