@@ -1,6 +1,8 @@
 <% include ./partials/header %>
 
-
+<meta property="og:type"        content="article:test" />
+<meta property="og:title"       content="<%= post.title.titleCase() %>" />
+<meta property="og:description" content="<%- post.body.substring(0, 50) %>" />
 
 <div class="ui main very padded text w-70 segment">
 
