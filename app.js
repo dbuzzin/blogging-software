@@ -57,7 +57,7 @@ app.use(require("./routes/likepost"));
 
 // START SERVER
 
-app.listen(3000, (err) => {
+app.listen(process.env.PORT || 80, (err) => {
     if(err) {
         console.log("Error: ", err);
     } else {
