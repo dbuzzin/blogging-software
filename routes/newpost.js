@@ -3,17 +3,23 @@ const express   = require("express"),
 
       router = express.Router();
 
-router.get("/new", (req, res) => {
+router.get("/posts/new", (req, res) => {
     res.render("newpost");
 });
 
-router.post("/new", (req, res) => {
-    Post.create(req.body.post, (err, post) => {
+router.post("/posts/new", (req, res) => {
+
+    let getPost = {
+        title   : req.body.post.title.toLowerCase(),
+        body    : req.sanitize(req.body.post.body)
+    }   
+
+    Post.create(getPost, (err, post) => {
         if(err) {
             console.log("Error: ", err);
         } else {
             console.log("Added New Post");
-            res.redirect("/");
+            res.redirect(`/posts/${post.year}/${post.month}/${post.day}/${post.title.replace(/\s/g, "-")}`);
         }
     });
 });

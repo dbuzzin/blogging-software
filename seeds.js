@@ -28,8 +28,8 @@ function seedDB() {
                             console.log("User Created");
                             
                             Post.create({
-                                title   : "Test Post 1",
-                                body    : "Test body for Test Post 1"
+                                title   : "Test Post 1".toLowerCase(),
+                                body    : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consectetur purus ut faucibus pulvinar elementum. Aliquam etiam erat velit scelerisque in dictum non. Tristique senectus et netus et malesuada fames ac turpis. Bibendum est ultricies integer quis auctor elit sed vulputate. Turpis egestas integer eget aliquet. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio. Id ornare arcu odio ut sem nulla. Est sit amet facilisis magna etiam tempor orci eu. Faucibus turpis in eu mi bibendum neque egestas congue quisque. Suscipit tellus mauris a diam maecenas sed enim ut. Bibendum neque egestas congue quisque egestas diam. Mi ipsum faucibus vitae aliquet. Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu."
                             }, (err, post) => {
                                 if(err) {
                                     console.log("Error: ", err);

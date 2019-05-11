@@ -1,7 +1,21 @@
-<form action="/new" method="POST">
+<% include ./partials/header %>
 
-    <input type="text" name="post[title]" placeholder="Title"/>
-    <textarea name="post[body]" placeholder="What do you have to say..."></textarea>
-    <button>Post</button>
+<div class="ui main text w-70 segment">
 
-</form>
+    <form class="ui form" autocomplete="off" action="/posts/new" method="POST">
+
+        <div class="field">
+            <input type="text" name="post[title]" placeholder="Title" required/>
+        </div>
+
+        <div class="field">
+            <textarea name="post[body]" placeholder="What do you have to say..." required></textarea>
+        </div>
+
+        <button class="ui primary button">Post</button>
+
+    </form>
+
+</div>
+
+<% include ./partials/footer %>
