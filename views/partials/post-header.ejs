@@ -4,7 +4,7 @@
         <title>Blog Tings</title>
 
         <meta property="og:url"         content="https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>" />
-        <meta property="og:type"        content="article:test" />
+        <meta property="og:type"        content="article" />
         <meta property="og:title"       content="<%= post.title.titleCase() %>" />
         <meta property="og:description" content="<%- post.body.substring(0, 50) %>" />
 
