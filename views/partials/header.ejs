@@ -3,6 +3,10 @@
     <head>
         <title>Blog Tings</title>
 
+        <meta property="og:type"        content="article:test" />
+        <meta property="og:title"       content="<%= post.title.titleCase() %>" />
+        <meta property="og:description" content="<%- post.body.substring(0, 50) %>" />
+
         <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css" rel="stylesheet" />
         <link href="/css/style.css" rel="stylesheet" />
     </head>
