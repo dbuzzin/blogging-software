@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <%# <div class="fb-share-button" data-href="http://localhost:3000/posts/2019/05/11/test-post-1" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fposts%2F2019%2F05%2F11%2Ftest-post-1&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div> %>
+    <div class="fb-share-button" data-href="https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div> %>
 
 </div>
 
