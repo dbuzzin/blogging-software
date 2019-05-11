@@ -24,12 +24,10 @@ router.put("/posts/:year/:month/:day/:title", (req, res) => {
     }  
 
     let findPost = {
-        title   : req.params.title.replace(/[-]/gi, " "),
-        created : {
-            year    : req.params.year,
-            month   : req.params.month,
-            day     : req.params.day
-        }   
+        title           : req.params.title.replace(/[-]/gi, " "),
+        "created.year"  : req.params.year,
+        "created.month" : req.params.month,
+        "created.day"   : req.params.day
     }
 
     Post.findOneAndUpdate(findPost, getPost, (err, post) => {
