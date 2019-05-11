@@ -1,0 +1,21 @@
+<% include ./partials/header %>
+
+<div class="ui main text w-70 segment">
+
+    <form class="ui form" autocomplete="off" action="<%= `/posts/${post.year}/${post.month}/${post.day}/${post.title.replace(/\s/g, "-")}` %>?_method=PUT" method="POST">
+
+        <div class="field">
+            <input type="text" name="post[title]" placeholder="Title" value="<%= post.title%>" required/>
+        </div>
+
+        <div class="field">
+            <textarea name="post[body]" placeholder="What do you have to say..." required><%= post.body %></textarea>
+        </div>
+
+        <button class="ui primary button">Edit</button>
+
+    </form>
+
+</div>
+
+<% include ./partials/footer %>

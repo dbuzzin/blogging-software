@@ -1,0 +1,15 @@
+<% include ./partials/header %>
+
+<h1><%= post.title.titleCase() %></h1>
+
+<p><%- post.body %></p>
+
+<a href="/posts/<%= post._id %>/edit">
+    <button class="ui button orange">Edit</button>
+</a>
+
+<form class="ib" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+    <button class="ui button red">Delete</button>
+</form>
+
+<% include ./partials/footer %>
