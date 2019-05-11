@@ -25,7 +25,7 @@ app.use(sanitizer());
 
 app.locals = require("./public/js/string-functions");
 
-mongoose.connect("mongodb://localhost/blogging-software", {useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect("mongodb://testdb-358:testdb-358@ds155396.mlab.com:55396/heroku_tb6zrmm8", {useNewUrlParser: true, useFindAndModify: false});
 
 // seedDB();
 
