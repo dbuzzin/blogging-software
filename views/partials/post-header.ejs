@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <title>Blog Tings</title>
+
+        <meta property="og:url"         content="https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>" />
+        <meta property="og:type"        content="article:test" />
+        <meta property="og:title"       content="<%= post.title.titleCase() %>" />
+        <meta property="og:description" content="<%- post.body.substring(0, 50) %>" />
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css" rel="stylesheet" />
+        <link href="/css/style.css" rel="stylesheet" />
+    </head>
+    <body>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3"></script>
+
+    <div class="ui top fixed menu">
+        <a class="item" href="/">Home</a>
+        <a class="item" href="/posts/new">New Post</a>
+        <a class="item right">Sign-in</a>
+    </div>
+
