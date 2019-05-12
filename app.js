@@ -7,7 +7,7 @@ const express       = require("express"),
       sanitizer     = require("express-sanitizer");
       seedDB        = require("./seeds");
 
-
+require("dotenv").config();
 
 
 
@@ -25,8 +25,11 @@ app.use(sanitizer());
 
 app.locals = require("./public/js/string-functions");
 
-// mongoose.connect("mongodb://localhost/blogging-software", {useNewUrlParser: true, useFindAndModify: false});
-mongoose.connect("mongodb://testdb-358:testdb-358@ds155396.mlab.com:55396/heroku_tb6zrmm8", {useNewUrlParser: true, useFindAndModify: false});
+if(process.env.NODE_ENV === "dev") {
+    mongoose.connect("mongodb://localhost/blogging-software", {useNewUrlParser: true, useFindAndModify: false});
+} else if(process.env.NODE_ENV === "dep") {
+    mongoose.connect(`${process.env.DB_HOST}://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds155396.mlab.com:55396/${process.env.DB_NAME}`, {useNewUrlParser: true, useFindAndModify: false});
+}
 
 // seedDB();
 
@@ -57,6 +60,9 @@ app.use(require("./routes/posting/likepost"));
 // Searching
 app.use(require("./routes/searching/search"));
 
+// Users
+app.use(require("./routes/users/register"));
+
 
 app.get("/", (req, res) => {
     res.redirect("/feed")
@@ -66,18 +72,11 @@ app.get("/", (req, res) => {
 
 // START SERVER
 
-app.listen(process.env.PORT || 80, (err) => {
+app.listen(process.env.PORT, (err) => {
     if(err) {
         console.log("Error: ", err);
     } else {
         console.log("Server Started");
     }
 });
-// app.listen(3000, (err) => {
-//     if(err) {
-//         console.log("Error: ", err);
-//     } else {
-//         console.log("Server running on port 3000");
-//     }
-// });
 

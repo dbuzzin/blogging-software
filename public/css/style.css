@@ -6,6 +6,10 @@ body {
     width: 70%;
 }
 
+.w-30 {
+    width: 30%;
+}
+
 .ib {
     display: inline-block;
 }
