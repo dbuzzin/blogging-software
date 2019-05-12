@@ -27,11 +27,11 @@ router.get("/posts/search", (req, res) => {
             console.log(regex);
             foundPosts.filter(post => {
                 if(regex.test(post.title) || regex.test(post.body)) {
-                    results.push(post);
+                    if(results.indexOf(post !== 0)) results.push(post);
                 }
                 post.tags.forEach(tag => {
                     if(regex.test(tag)) {
-                        results.push(post);
+                        if(results.indexOf(post !== 0)) results.push(post);
                     }
                 });
             });
