@@ -6,7 +6,7 @@
         <meta property="og:url"         content="https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>" />
         <meta property="og:type"        content="article" />
         <meta property="og:title"       content="<%= post.title.titleCase() %>" />
-        <meta property="og:description" content="<%- post.body.substring(0, 100) %>" />
+        <meta property="og:description" content="<%= post.body.substring(0, 100) %>" />
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css" rel="stylesheet" />
         <link href="/css/style.css" rel="stylesheet" />
@@ -19,6 +19,7 @@
     <div class="ui top fixed menu">
         <a class="item" href="/feed">Home</a>
         <a class="item" href="/posts/new">New Post</a>
+        <a class="item" href="/posts/search">Search</a>
         <a class="item right">Sign-in</a>
     </div>
 

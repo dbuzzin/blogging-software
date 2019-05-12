@@ -55,7 +55,7 @@ app.use(require("./routes/posting/deletepost"));
 app.use(require("./routes/posting/likepost"));
 
 // Searching
-app.use(require("./routes/searching/tags"));
+app.use(require("./routes/searching/search"));
 
 
 app.get("/", (req, res) => {
@@ -73,7 +73,6 @@ app.listen(process.env.PORT || 80, (err) => {
         console.log("Server Started");
     }
 });
-
 // app.listen(3000, (err) => {
 //     if(err) {
 //         console.log("Error: ", err);

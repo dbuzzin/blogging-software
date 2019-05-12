@@ -1,39 +1,61 @@
 <% include ./partials/header %>
 
+<div class="ui w-70 segment">
+    <form action="/posts/search" method="GET">
+        <input type="text" name="query" />
+        <button>Search</button>
+    </form>
+</div>
 
-<% posts.reverse().forEach(post => { %> 
+<div id="#searchResults">
 
-    <div class="ui raised very padded text w-70 segment">
+    <% if(posts.length === 0) { %>
 
-        <h2 class="ui header"><%= post.title.titleCase() %></h2>
-        <p><%- post.body.substring(0, 3000) %></p>
+        <div class="ui raised very padded text w-70 segment">
 
-        <div class="ui center aligned basic segment">
-            <a href="<%= `/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}` %>">
-                <button class="ui button primary">Read More</button>
-            </a>
+            <span>No posts matched your search</span>
+
         </div>
 
-        <div class="ui tiny horizontal list">
+    <% } %>
 
-            <div class="item">Tags: </div>
-            <% if(post.tags.length !== 0) {
-                post.tags.forEach(tag => { %>
+    <% posts.reverse().forEach(post => { %> 
+
+        <div class="ui raised very padded text w-70 segment">
+
             
-                <div class="item"><a href="/posts/search?tag=<%= tag %>"><%= tag %></a></div>
+            <h2 class="ui header"><%= post.title.titleCase() %></h2>
+            <p><%- post.body.substring(0, 3000) %></p>
 
-                <% }); 
-                } else { %>
+            <div class="ui center aligned basic segment">
+                <a href="<%= `/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}` %>">
+                    <button class="ui button primary">Read More</button>
+                </a>
+            </div>
 
-                <div class="item">none</div>
+            <div class="ui tiny horizontal list">
 
-            <% } %>
-    
+                <div class="item">Tags: </div>
+                <% if(post.tags.length !== 0) {
+                    post.tags.forEach(tag => { %>
+                
+                    <div class="item"><a href="/posts/search?tag=<%= tag %>"><%= tag %></a></div>
+
+                    <% }); 
+                    } else { %>
+
+                    <div class="item">none</div>
+
+                <% } %>
+        
+            </div>
+
         </div>
 
-    </div>
+    <% }); %>
+</div>
 
-<% }); %>
+
 
 
 
