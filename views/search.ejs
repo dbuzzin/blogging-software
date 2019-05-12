@@ -14,6 +14,23 @@
             </a>
         </div>
 
+        <div class="ui tiny horizontal list">
+
+            <div class="item">Tags: </div>
+            <% if(post.tags.length !== 0) {
+                post.tags.forEach(tag => { %>
+            
+                <div class="item"><a href="/posts/search?tag=<%= tag %>"><%= tag %></a></div>
+
+                <% }); 
+                } else { %>
+
+                <div class="item">none</div>
+
+            <% } %>
+    
+        </div>
+
     </div>
 
 <% }); %>
