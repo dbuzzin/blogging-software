@@ -12,6 +12,8 @@ input.addEventListener("keypress", function(e) {
     }
 });
 
+input.addEventListener("blur", createTag)
+
 function createTag() {
 
     let val = input.value;
