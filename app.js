@@ -25,8 +25,8 @@ app.use(sanitizer());
 
 app.locals = require("./public/js/string-functions");
 
-mongoose.connect("mongodb://localhost/blogging-software", {useNewUrlParser: true, useFindAndModify: false});
-// mongoose.connect("mongodb://testdb-358:testdb-358@ds155396.mlab.com:55396/heroku_tb6zrmm8", {useNewUrlParser: true, useFindAndModify: false});
+// mongoose.connect("mongodb://localhost/blogging-software", {useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect("mongodb://testdb-358:testdb-358@ds155396.mlab.com:55396/heroku_tb6zrmm8", {useNewUrlParser: true, useFindAndModify: false});
 
 // seedDB();
 
@@ -58,25 +58,27 @@ app.use(require("./routes/posting/likepost"));
 app.use(require("./routes/searching/tags"));
 
 
-
+app.get("/", (req, res) => {
+    res.redirect("/feed")
+});
 
 
 
 // START SERVER
 
-// app.listen(process.env.PORT || 80, (err) => {
-//     if(err) {
-//         console.log("Error: ", err);
-//     } else {
-//         console.log("Server Started");
-//     }
-// });
-
-app.listen(3000, (err) => {
+app.listen(process.env.PORT || 80, (err) => {
     if(err) {
         console.log("Error: ", err);
     } else {
-        console.log("Server running on port 3000");
+        console.log("Server Started");
     }
 });
+
+// app.listen(3000, (err) => {
+//     if(err) {
+//         console.log("Error: ", err);
+//     } else {
+//         console.log("Server running on port 3000");
+//     }
+// });
 
