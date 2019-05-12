@@ -12,7 +12,8 @@ const mongoose = require("mongoose"),
             day       : {type: String, default: String(date.getDate()).replace(/^(\d)$/, "0$1")},
           },
           likes     : {type: Number, default: 0},
-          dislikes  : {type: Number, default: 0}
+          dislikes  : {type: Number, default: 0},
+          tags      : {type: Array,  default: []},
 
       });
 

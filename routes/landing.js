@@ -3,7 +3,7 @@ const express   = require("express"),
 
       router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/feed", (req, res) => {
 
     Post.find({}, (err, posts) => {
 

@@ -1,5 +1,5 @@
 const express   = require("express"),
-      Post      = require("../models/post"),
+      Post      = require("../../models/post"),
 
       router = express.Router();
 
@@ -8,7 +8,7 @@ router.get("/posts/:id/edit", (req, res) => {
     Post.findById(req.params.id, (err, post) => {
         if(err) {
             console.log("Error: ", err);
-            res.redirect("/");
+            res.redirect("/feed");
         } else {
             res.render("editpost", {post: post});
         }

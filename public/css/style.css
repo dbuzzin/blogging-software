@@ -22,3 +22,47 @@ body {
 .fl-r {
     float: right;
 }
+
+.div-input {
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: none;
+    line-height: 1.3em;
+    font-size: 1em;
+    background: #FFFFFF;
+    padding: 0 1em;
+    color: rgba(0, 0, 0, 0.87);
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    border-radius: 0.28571429rem;
+    box-shadow: 0em 0em 0em 0em transparent inset;
+}
+
+.ui.form input[type="text"].tag-input {
+    display: inline-block;
+    width: 100px;
+    border: 0;
+    outline: none;
+    padding-left: 0;
+    line-height: 1.3rem;
+}
+
+.tagged {
+    display: inline-block;
+    margin: .35em .5em .35em 0;
+    padding: .35em .5em;
+    background-color: #e1e1e1;
+}
+
+.tag-cross {
+    margin-left: .25em;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.tag-cross:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 1);
+    transition: all .2s;
+}
+
+.tag-input:focus .div-input{
+    border-color: #85B7D9;
+}

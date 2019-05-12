@@ -1,0 +1,23 @@
+<% include ./partials/header %>
+
+
+<% posts.reverse().forEach(post => { %> 
+
+    <div class="ui raised very padded text w-70 segment">
+
+        <h2 class="ui header"><%= post.title.titleCase() %></h2>
+        <p><%- post.body.substring(0, 3000) %></p>
+
+        <div class="ui center aligned basic segment">
+            <a href="<%= `/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}` %>">
+                <button class="ui button primary">Read More</button>
+            </a>
+        </div>
+
+    </div>
+
+<% }); %>
+
+
+
+<% include ./partials/footer %>

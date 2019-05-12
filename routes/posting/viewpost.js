@@ -1,5 +1,5 @@
 const express   = require("express"),
-      Post      = require("../models/post"),
+      Post      = require("../../models/post"),
 
       router = express.Router();
 
@@ -13,7 +13,6 @@ router.get("/posts/:year/:month/:day/:title", (req, res) => {
     }
 
     Post.findOne(findPost, (err, post) => {
-        console.log(post);
         if(err) {
             console.log("Error: ", err);
         } else {

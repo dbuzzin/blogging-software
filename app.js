@@ -25,7 +25,8 @@ app.use(sanitizer());
 
 app.locals = require("./public/js/string-functions");
 
-mongoose.connect("mongodb://testdb-358:testdb-358@ds155396.mlab.com:55396/heroku_tb6zrmm8", {useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect("mongodb://localhost/blogging-software", {useNewUrlParser: true, useFindAndModify: false});
+// mongoose.connect("mongodb://testdb-358:testdb-358@ds155396.mlab.com:55396/heroku_tb6zrmm8", {useNewUrlParser: true, useFindAndModify: false});
 
 // seedDB();
 
@@ -45,11 +46,17 @@ const Post = require("./models/post"),
 // ROUTES
 
 app.use(require("./routes/landing"));
-app.use(require("./routes/newpost"));
-app.use(require("./routes/viewpost"));
-app.use(require("./routes/editpost"));
-app.use(require("./routes/deletepost"));
-app.use(require("./routes/likepost"));
+
+// Posting
+app.use(require("./routes/posting/newpost"));
+app.use(require("./routes/posting/viewpost"));
+app.use(require("./routes/posting/editpost"));
+app.use(require("./routes/posting/deletepost"));
+app.use(require("./routes/posting/likepost"));
+
+// Searching
+app.use(require("./routes/searching/tags"));
+
 
 
 
@@ -57,19 +64,19 @@ app.use(require("./routes/likepost"));
 
 // START SERVER
 
-app.listen(process.env.PORT || 80, (err) => {
-    if(err) {
-        console.log("Error: ", err);
-    } else {
-        console.log("Server Started");
-    }
-});
-
-// app.listen(3000, (err) => {
+// app.listen(process.env.PORT || 80, (err) => {
 //     if(err) {
 //         console.log("Error: ", err);
 //     } else {
-//         console.log("Server running on port 3000");
+//         console.log("Server Started");
 //     }
 // });
+
+app.listen(3000, (err) => {
+    if(err) {
+        console.log("Error: ", err);
+    } else {
+        console.log("Server running on port 3000");
+    }
+});
 

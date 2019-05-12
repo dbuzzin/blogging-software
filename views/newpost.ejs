@@ -2,10 +2,17 @@
 
 <div class="ui main text w-70 segment">
 
-    <form class="ui form" autocomplete="off" action="/posts/new" method="POST">
+    <form id="newPost" class="ui form" autocomplete="off" action="/posts/new" method="POST">
 
         <div class="field">
             <input type="text" name="post[title]" placeholder="Title" required/>
+        </div>
+
+        <div class="field">
+            <div class="div-input" type="text">
+                <input class="tag-input" type="text" placeholder="Add Tag..."/>
+                <input id="hiddenTag" type="hidden" name="post[tags]"/>
+            </div>
         </div>
 
         <div class="field">
@@ -17,5 +24,7 @@
     </form>
 
 </div>
+
+<script src="/js/tag-input.js"></script>
 
 <% include ./partials/footer %>

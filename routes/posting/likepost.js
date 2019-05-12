@@ -1,5 +1,5 @@
 const express   = require("express"),
-      Post      = require("../models/post"),
+      Post      = require("../../models/post"),
 
       router = express.Router();
 
