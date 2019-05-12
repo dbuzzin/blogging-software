@@ -3,6 +3,7 @@
 <div class="ui main very padded text w-70 segment">
 
     <h1><%= post.title.titleCase() %></h1>
+    <time><%= post.created.fulldate.formatDate() %></time>
 
     <p><%- post.body %></p>
 

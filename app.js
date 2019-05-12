@@ -19,7 +19,7 @@ app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(methodOver("_method"));
 app.use(sanitizer());
 
@@ -66,18 +66,18 @@ app.get("/", (req, res) => {
 
 // START SERVER
 
-app.listen(process.env.PORT || 80, (err) => {
-    if(err) {
-        console.log("Error: ", err);
-    } else {
-        console.log("Server Started");
-    }
-});
-// app.listen(3000, (err) => {
+// app.listen(process.env.PORT || 80, (err) => {
 //     if(err) {
 //         console.log("Error: ", err);
 //     } else {
-//         console.log("Server running on port 3000");
+//         console.log("Server Started");
 //     }
 // });
+app.listen(3000, (err) => {
+    if(err) {
+        console.log("Error: ", err);
+    } else {
+        console.log("Server running on port 3000");
+    }
+});
 

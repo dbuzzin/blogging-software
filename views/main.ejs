@@ -6,6 +6,7 @@
     <div class="ui raised very padded text w-70 segment">
 
         <h2 class="ui header"><%= post.title.titleCase() %></h2>
+        <time><%= post.created.fulldate.formatDate() %></time>
         <p><%- post.body.substring(0, 3000) %></p>
 
         <div class="ui center aligned basic segment">

@@ -5,7 +5,7 @@
     <form id="newPost" class="ui form" autocomplete="off" action="/posts/new" method="POST">
 
         <div class="field">
-            <input type="text" name="post[title]" placeholder="Title" required/>
+            <input id="titleInput" type="text" name="post[title]" placeholder="Title" required/>
         </div>
 
         <div class="field">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="field">
-            <textarea name="post[body]" placeholder="What do you have to say..." required></textarea>
+            <textarea id="bodyInput" name="post[body]" placeholder="What do you have to say..." required></textarea>
         </div>
 
         <button class="ui primary button">Post</button>
@@ -25,6 +25,17 @@
 
 </div>
 
-<script src="/js/tag-input.js"></script>
+<%# PREVIEW %>
+
+<div class="ui raised very padded text w-70 segment">
+
+    <h2 class="ui header" id="previewTitle"></h2>
+    <time id="previewTime"></time>
+    <p id="previewBody"></p>
+
+</div>
+
+<script src="/js/post/tag-input.js"></script>
+<script src="/js/post/post-preview.js"></script>
 
 <% include ./partials/footer %>
