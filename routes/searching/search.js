@@ -30,7 +30,7 @@ router.get("/posts/search", (req, res) => {
                     results.push(post);
                 }
                 post.tags.forEach(tag => {
-                    if(tag === query.queries) {
+                    if(regex.test(tag)) {
                         results.push(post);
                     }
                 });
