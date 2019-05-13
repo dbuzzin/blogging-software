@@ -12,7 +12,7 @@ router.get("/feed", auth.isLogged, (req, res) => {
         if(err) {
             console.log("Error: ", err);
         } else {
-            res.render("main", {posts: posts, user: req.user});
+            res.render("main", {posts: posts, user: req.user, isAuth: req.isAuthenticated()});
         }
         
     });

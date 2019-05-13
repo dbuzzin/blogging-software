@@ -14,12 +14,19 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3"></script>
 
     <div class="ui top fixed menu">
-        <a class="item" href="/feed">Feed</a>
-        <a class="item" href="/posts/new">New Post</a>
+        <% if(isAuth) { %>
+            <a class="item" href="/feed">Feed</a>
+            <a class="item" href="/posts/new">New Post</a>
+        <% } %>
         <a class="item" href="/posts/search">Search</a>
         <div class="right menu">
-            <a class="item"><%= user.username %></a>
-            <a class="item" href="/logout">Logout</a>
+            <% if(isAuth) { %>
+                <a class="item" href="<%= user.blogname %>"><%= user.username %></a>
+                <a class="item" href="/logout">Logout</a>
+            <% } else { %>
+                <a class="item" href="/logout">Login</a>
+                <a class="item" href="/signup">Sign Up</a>
+            <% } %>
         </div>
     </div>
 

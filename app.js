@@ -11,12 +11,7 @@ const express       = require("express"),
       passport      = require("passport"),
       LocalStrategy = require("passport-local").Strategy;
 
-      // SEED
-      seedDB        = require("./seeds");
-
                       require("dotenv").config();
-
-
 
 // INIT APP
 
@@ -33,7 +28,7 @@ app.use(sanitizer());
 app.use(sessions({
     cookieName  : "session",
     secret      : process.env.SESSION_SECRET,
-    duration    : 60 * 60 * 1000 // 1 hour
+    duration    : 7 * 24 * 60 * 60 * 1000 // 1 week
 }));
 
 app.use(passport.initialize());
@@ -52,14 +47,6 @@ if(process.env.NODE_ENV === "dev") {
 } else if(process.env.NODE_ENV === "dep") {
     mongoose.connect(`${process.env.DB_HOST}://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds155396.mlab.com:55396/${process.env.DB_NAME}`, {useNewUrlParser: true, useFindAndModify: false});
 }
-
-// seedDB();
-
-
-
-
-
-
 
 // ROUTES
 
@@ -80,12 +67,12 @@ app.use(require("./routes/users/register"));
 app.use(require("./routes/users/login"));
 app.use(require("./routes/users/logout"));
 
+app.use(require("./routes/users/blog"));
+
 
 app.get("/", (req, res) => {
-    res.redirect("/signup")
+    res.redirect("/login");
 });
-
-
 
 // START SERVER
 

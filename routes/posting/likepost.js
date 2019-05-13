@@ -1,34 +1,37 @@
 const express   = require("express"),
       Post      = require("../../models/post"),
+      User      = require("../../models/user"),
       auth      = require("../../middleware/auth"),
 
       router = express.Router();
 
 router.put("/posts/:id/like", auth.isLogged, (req, res) => {
-    console.log(req.params.id);
-    Post.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } }, (err, like) => {
-        console.log(like);
+
+    Post.findByIdAndUpdate(req.params.id, { $push: { likes: req.user } }, (err, post) => {
         if(err) {
             console.log("Error: ", err);
         } else {
-            res.send(like);
+            User.findByIdAndUpdate(req.user._id, { $push: { likes: post } }, (err, post) => {
+                res.send(post);
+            });
         }
+
     });
 });
 
 router.put("/posts/:id/dislike", auth.isLogged, (req, res) => {
-    console.log(req.params.id);
-    Post.findByIdAndUpdate(req.params.id, { $inc: { dislikes: 1 } }, (err, dislike) => {
-        console.log(dislike);
+    Post.findByIdAndUpdate(req.params.id, { $push: { dislikes: req.user } }, (err, post) => {
         if(err) {
             console.log("Error: ", err);
         } else {
-            res.send(dislike);
+            User.findByIdAndUpdate(req.user._id, { $push: { dislikes: post } }, (err, post) => {
+                res.send(post);
+            });
         }
     });
 });
 
-router.get("/posts/:id/getData", auth.isLogged, (req, res) => {
+router.get("/posts/:id/getData", (req, res) => {
     Post.findById(req.params.id).then(data => {
         res.json(data);
     });

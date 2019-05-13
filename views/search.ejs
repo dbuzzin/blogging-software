@@ -1,8 +1,4 @@
-<% if(isAuth) { %>
-    <%- include("./partials/header", {user: user}) %>
-<% } else { %>
-    <% include ./partials/pre-header %>
-<% } %>
+<%- include("./partials/header", {user: user, isAuth: isAuth}) %>
 
 <div class="ui w-70 segment">
     <form action="/posts/search" method="GET">
@@ -29,7 +25,8 @@
 
             
             <h2 class="ui header"><%= post.title.titleCase() %></h2>
-            <time><%= post.created.fulldate.formatDate() %></time>
+            <caption>by <%= post.author %></caption> - <time><%= post.created.fulldate.formatDate() %></time>
+            <br /><br />
             <p><%- post.body.substring(0, 3000) %></p>
 
             <div class="ui center aligned basic segment">
@@ -44,7 +41,7 @@
                 <% if(post.tags.length !== 0) {
                     post.tags.forEach(tag => { %>
                 
-                    <div class="item"><a href="/posts/search?tag=<%= tag %>"><%= tag %></a></div>
+                    <div class="item"><i><a href="/posts/search?tag=<%= tag %>"><%= tag %></a></i></div>
 
                     <% }); 
                     } else { %>

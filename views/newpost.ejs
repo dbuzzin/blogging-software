@@ -1,4 +1,4 @@
-<%- include("./partials/header", {user: user}) %>
+<%- include("./partials/header", {user: user, isAuth: isAuth}) %>
 
 <div class="ui main text w-70 segment">
 
@@ -31,11 +31,12 @@
 
     <h2 class="ui header" id="previewTitle"></h2>
     <time id="previewTime"></time>
+    <br /><br />
     <p id="previewBody"></p>
 
 </div>
 
-<script src="/js/post/tag-input.js"></script>
+<script src="/js/post/tag-input2.js"></script>
 <script src="/js/post/post-preview.js"></script>
 
 <% include ./partials/footer %>

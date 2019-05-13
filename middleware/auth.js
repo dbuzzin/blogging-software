@@ -3,7 +3,6 @@ const express   = require("express"),
 
 const isLogged = (req, res, next) => {
     if(req.isAuthenticated()) {
-        console.log(req);
         return next();
     }
     res.redirect("/login");

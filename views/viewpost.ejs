@@ -1,57 +1,74 @@
-<% if(isAuth) { %>
-    <%- include("./partials/header", {user: user}) %>
-<% } else { %>
-    <% include ./partials/pre-header %>
-<% } %>
+<%- include("./partials/header", {user: user, isAuth: isAuth}) %>
 
 <div class="ui main very padded text w-70 segment">
 
     <h1><%= post.title.titleCase() %></h1>
-    <time><%= post.created.fulldate.formatDate() %></time>
-
+    <caption>by <%= post.author %></caption> - <time><%= post.created.fulldate.formatDate() %></time>
+    <br />
+    <br />
     <p><%- post.body %></p>
+
+    <%# =============================================
+     
+                     Post Tool Bar
+    
+    ============================================= %>
 
     <div class="ui tiny horizontal list">
 
         <div class="item">Tags: </div>
-        <% if(post.tags.length !== 0) {
-              post.tags.forEach(tag => { %>
+        <% if(post.tags.length !== 0) { %>
+            <% post.tags.forEach(tag => { %>
         
-            <div class="item"><a href="/posts/search?tag=<%= tag %>"><%= tag %></a></div>
+            <div class="item"><i><a href="/posts/search?tag=<%= tag %>"><%= tag %></a></i></div>
 
-            <% }); 
-            } else { %>
+            <% }); %>
+           <% } else { %>
 
             <div class="item">none</div>
 
+        <% }; %>
+
+    </div>
+
+        <%# =============================================
+     
+                        Post Tool Bar
+    
+        ============================================= %>
+
+        <% if(isAuth) { %>
+            <div>
+                <% user.posts.forEach(found => { %>
+                    <% if(String(found) === String(post._id)) { %>
+                        <a href="/posts/<%= post._id %>/edit">
+                            <button class="ui button orange">Edit</button>
+                        </a>
+                        <form class="ib" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                            <button class="ui button red">Delete</button>
+                        </form>
+                    <% } %>
+                <% }) %>
+
+                <div class="fl-r">
+                    <button id="likeBtn" class="ui button">Like <span id="likeNum"><%= post.likes.length %></span></button>
+                    <button id="dislikeBtn" class="ui button">Dislike <span id="dislikeNum"><%= post.dislikes.length %></span></button>
+                </div>
+                
+            </div>
         <% } %>
 
-
-    
-    </div>
-        
-
     <div>
-        <a href="/posts/<%= post._id %>/edit">
-            <button class="ui button orange">Edit</button>
-        </a>
-        <form class="ib" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-            <button class="ui button red">Delete</button>
-        </form>
-        <div class="fl-r">
-            <button id="likeBtn" class="ui button">Like <span id="likeNum"><%= post.likes %></span></button>
-            <button id="dislikeBtn" class="ui button">Dislike <span id="dislikeNum"><%= post.dislikes %></span></button>
-        </div>
+        <div class="fb-share-button" data-href="https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div> %>
     </div>
-
-    <div class="fb-share-button" data-href="https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div> %>
 
 </div>
 
 <script>
-
-    let postID = "<%= post._id %>";
-
+    let userName    = "<%= user.username %>",
+        userID      = "<%= user._id %>",
+        postID      = "<%= post._id %>",
+        loggedIn    = <%= isAuth %>;
 </script>
 
 <script src="/js/handle-requests.js"></script>
