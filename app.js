@@ -4,7 +4,14 @@ const express       = require("express"),
       mongoose      = require("mongoose"),
       bodyParser    = require("body-parser"),
       methodOver    = require("method-override"),
-      sanitizer     = require("express-sanitizer");
+      sanitizer     = require("express-sanitizer"),
+
+      //AUTH
+      sessions      = require("client-sessions"),
+      passport      = require("passport"),
+      LocalStrategy = require("passport-local").Strategy;
+
+      // SEED
       seedDB        = require("./seeds");
 
 require("dotenv").config();
@@ -23,6 +30,21 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOver("_method"));
 app.use(sanitizer());
 
+app.use(sessions({
+    cookieName  : "session",
+    secret      : process.env.SESSION_SECRET,
+    duration    : 60 * 60 * 1000 // 1 hour
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+const User = require("./models/user");
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.locals = require("./public/js/string-functions");
 
 if(process.env.NODE_ENV === "dev") {
@@ -34,11 +56,6 @@ if(process.env.NODE_ENV === "dev") {
 // seedDB();
 
 
-
-// Models
-
-const Post = require("./models/post"),
-      User = require("./models/user");
 
 
 
@@ -60,10 +77,12 @@ app.use(require("./routes/searching/search"));
 
 // Users
 app.use(require("./routes/users/register"));
+app.use(require("./routes/users/login"));
+app.use(require("./routes/users/logout"));
 
 
 app.get("/", (req, res) => {
-    res.redirect("/feed")
+    res.redirect("/signup")
 });
 
 

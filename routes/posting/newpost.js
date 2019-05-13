@@ -1,13 +1,14 @@
 const express   = require("express"),
       Post      = require("../../models/post"),
+      auth      = require("../../middleware/auth"),
 
       router = express.Router();
 
-router.get("/posts/new", (req, res) => {
-    res.render("newpost");
+router.get("/posts/new", auth.isLogged, (req, res) => {
+    res.render("newpost", {user: req.user});
 });
 
-router.post("/posts/new", (req, res) => {
+router.post("/posts/new", auth.isLogged, (req, res) => {
 
     let getPost = {
         title   : req.body.post.title.toLowerCase(),

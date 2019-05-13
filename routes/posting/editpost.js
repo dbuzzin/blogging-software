@@ -1,22 +1,23 @@
 const express   = require("express"),
       Post      = require("../../models/post"),
+      auth      = require("../../middleware/auth"),
 
       router = express.Router();
 
-router.get("/posts/:id/edit", (req, res) => {
+router.get("/posts/:id/edit", auth.isLogged, (req, res) => {
 
     Post.findById(req.params.id, (err, post) => {
         if(err) {
             console.log("Error: ", err);
             res.redirect("/feed");
         } else {
-            res.render("editpost", {post: post});
+            res.render("editpost", {post: post, user: req.user});
         }
     });
 
 });
 
-router.put("/posts/:year/:month/:day/:title", (req, res) => {
+router.put("/posts/:year/:month/:day/:title", auth.isLogged, (req, res) => {
 
     let getPost = {
         title   : req.body.post.title.toLowerCase(),

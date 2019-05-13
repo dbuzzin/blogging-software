@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start" : "node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,15 @@
   "homepage": "https://github.com/dbuzzin/blogging-software#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "client-sessions": "^0.8.0",
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-sanitizer": "^1.0.5",
     "method-override": "^3.0.0",
-    "mongoose": "^5.5.7"
+    "mongoose": "^5.5.7",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1"
   }
 }

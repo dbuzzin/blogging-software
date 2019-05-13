@@ -32,7 +32,7 @@ router.get("/posts/search", (req, res) => {
             results = foundPosts;
         }
 
-        res.render("search", {posts: results});
+        res.render("search", {posts: results, isAuth: req.isAuthenticated(), user: req.user});
 
     });
 

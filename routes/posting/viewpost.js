@@ -16,7 +16,7 @@ router.get("/posts/:year/:month/:day/:title", (req, res) => {
         if(err) {
             console.log("Error: ", err);
         } else {
-            res.render("viewpost", {post: post});
+            res.render("viewpost", {post: post, isAuth: req.isAuthenticated(), user: req.user});
         }
     });  
 });

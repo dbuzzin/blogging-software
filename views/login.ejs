@@ -1,0 +1,21 @@
+<% include ./partials/pre-header %>
+
+<div class="ui main text w-30 segment">
+
+    <form class="ui form" autocomplete="off" action="/login" method="POST">
+
+        <div class="field">
+            <input type="email" name="email" placeholder="Email..." required/>
+        </div>
+        <div class="field">
+            <input type="password" name="password" placeholder="Password..." required/>
+        </div>
+
+        <button class="ui primary button">Login</button>
+
+    </form>
+
+</div>
+
+
+<% include ./partials/footer %>

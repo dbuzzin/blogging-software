@@ -1,10 +1,10 @@
 const express   = require("express"),
-      mongoose  = require("mongoose");
       Post      = require("../../models/post"),
+      auth      = require("../../middleware/auth"),
 
       router = express.Router();
 
-router.delete("/posts/:id", (req, res) => {
+router.delete("/posts/:id", auth.isLogged, (req, res) => {
 
     Post.findByIdAndRemove(req.params.id, err => {
         if(err) {

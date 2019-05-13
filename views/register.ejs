@@ -1,14 +1,20 @@
-<% include ./partials/header %>
+<% include ./partials/pre-header %>
 
 <div class="ui main text w-30 segment">
 
-    <form id="newPost" class="ui form" autocomplete="off" action="/posts/new" method="POST">
+    <form class="ui form" autocomplete="off" action="/signup" method="POST">
 
         <div class="field">
-            <input type="email" name="post[email]" placeholder="Email..." required/>
+            <input type="text" name="username" placeholder="Username..." required/>
         </div>
         <div class="field">
-            <input type="password" name="post[password]" placeholder="Password..." required/>
+            <input type="text" name="blogname" placeholder="Name your blog..." required/>
+        </div>
+        <div class="field">
+            <input type="email" name="email" placeholder="Email..." required/>
+        </div>
+        <div class="field">
+            <input type="password" name="password" placeholder="Password..." required/>
         </div>
 
         <button class="ui primary button">Sign Up!</button>

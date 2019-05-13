@@ -1,4 +1,8 @@
-<% include ./partials/post-header %>
+<% if(isAuth) { %>
+    <%- include("./partials/header", {user: user}) %>
+<% } else { %>
+    <% include ./partials/pre-header %>
+<% } %>
 
 <div class="ui main very padded text w-70 segment">
 
