@@ -3,6 +3,8 @@
     <head>
         <title>Blog Tings</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <meta property="og:url"         content="https://dp358-blog-software.herokuapp.com/posts/<%= post.created.year %>/<%= post.created.month %>/<%= post.created.day %>/<%= post.title.toLowerCase().replace(/\s/g, "-") %>" />
         <meta property="og:type"        content="article" />
         <meta property="og:title"       content="<%= post.title.titleCase() %>" />

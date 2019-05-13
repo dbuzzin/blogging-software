@@ -3,6 +3,8 @@
     <head>
         <title>Blog Tings</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css" rel="stylesheet" />
         <link href="/css/style.css" rel="stylesheet" />
     </head>
@@ -21,7 +23,7 @@
         <a class="item" href="/posts/search">Search</a>
         <div class="right menu">
             <% if(isAuth) { %>
-                <a class="item" href="<%= user.blogname %>"><%= user.username %></a>
+                <a class="item" href="/<%= user.blogname %>"><%= user.username %></a>
                 <a class="item" href="/logout">Logout</a>
             <% } else { %>
                 <a class="item" href="/logout">Login</a>
