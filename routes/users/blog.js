@@ -8,10 +8,8 @@ const express   = require("express"),
       router = express.Router();
 
 router.get("/:blog", auth.isLogged, (req, res) => {
-
     
-
-    User.findOne({blogname: req.params.blog}, (err, user) => {
+    User.findOne({blogurl: req.params.blog}, (err, user) => {
 
         if(err) {
             console.log("Error: ", err);

@@ -1,5 +1,6 @@
 const express   = require("express"),
       Post      = require("../../models/post"),
+      User      = require("../../models/user"),
 
       router = express.Router();
 
@@ -15,10 +16,16 @@ router.get("/posts/:year/:month/:day/:title", (req, res) => {
     Post.findOne(findPost, (err, post) => {
         if(err) {
             console.log("Error: ", err);
-        } else {
-            res.render("viewpost", {post: post, isAuth: req.isAuthenticated(), user: req.user || {}});
         }
+    }).then(post => {
+            res.render("posting/viewpost", {
+                post        : post,
+                user        : req.user || {},
+                isAuth      : req.isAuthenticated(), 
+             });
     });  
 });
 
 module.exports = router;
+
+// New Branch

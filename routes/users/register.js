@@ -14,7 +14,7 @@ router.post("/signup", (req, res) => {
     User.register(new User({
         email       : req.body.email,
         username    : req.body.username,
-        blogname    : req.body.blogname
+        blogurl     : req.body.blogurl
     }), req.body.password, (err, user) => {
         if(err) {
             console.log("Error: ", err);

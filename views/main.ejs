@@ -6,7 +6,7 @@
     <div class="ui raised very padded text w-70 segment">
 
         <h2 class="ui header"><%= post.title.titleCase() %></h2>
-        <caption>by <%= post.author %></caption> - <time><%= post.created.fulldate.formatDate() %></time>
+        <caption>by <a href="/<%= post.blogurl %>"><%= post.author %></a></caption> - <time><%= post.created.fulldate.formatDate() %></time>
         <br /><br />
         <p><%- post.body.substring(0, 3000) %></p>
 

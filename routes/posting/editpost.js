@@ -11,7 +11,7 @@ router.get("/posts/:id/edit", auth.isLogged, (req, res) => {
             console.log("Error: ", err);
             res.redirect("/feed");
         } else {
-            res.render("editpost", {post: post, user: req.user, isAuth: req.isAuthenticated()});
+            res.render("posting/editpost", {post: post, user: req.user, isAuth: req.isAuthenticated()});
         }
     });
 

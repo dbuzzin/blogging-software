@@ -6,6 +6,7 @@ const mongoose = require("mongoose"),
           title         : String,
           body          : String,
           author        : String,
+          blogurl       : String,
 
           created       : {
               fulldate  : {type: Date, default: Date.now},

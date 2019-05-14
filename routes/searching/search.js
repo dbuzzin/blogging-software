@@ -1,5 +1,6 @@
 const express   = require("express"),
       Post      = require("../../models/post"),
+      User      = require("../../models/user"),
       router    = express.Router();
 
 router.get("/posts/search", (req, res) => {
