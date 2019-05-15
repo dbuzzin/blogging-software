@@ -32,8 +32,9 @@ router.post("/posts/new", auth.isLogged, (req, res) => {
                 user.posts.push(post);
                 user.save();
                 messageBus.emit("message", {
-                    post : post,
-                    user : req.user
+                    type    : "post",
+                    content : post,
+                    user    : req.user
                 });
                 res.status(200).end();
             })

@@ -47,6 +47,7 @@ function timeoutPromise(ms, promise) {
             (res) => {
             clearTimeout(timeoutId);
             resolve(res);
+            startPolling();
             },
             (err) => {
             clearTimeout(timeoutId);
@@ -60,7 +61,6 @@ function startPolling() {
     return timeoutPromise(60000, fetch(`/posts/new/notification`)
     .then(res => res.json())
         .then(data => {
-            console.log("New Post");
             console.log(data);
         }));
 }
