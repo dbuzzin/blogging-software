@@ -38,9 +38,10 @@
 
 function timeoutPromise(ms, promise) {
     return new Promise((resolve, reject) => {
-        console.log("Polling Started...")
+        console.log("Polling Started...");
         const timeoutId = setTimeout(() => {
-            reject(new Error("Promise Timeout"))
+            reject(new Error("Promise Timeout"));
+            startPolling();
         }, ms);
         promise.then(
             (res) => {
@@ -53,11 +54,16 @@ function timeoutPromise(ms, promise) {
             }
         );
     })
-  }
+};
 
-  timeoutPromise(10000, fetch(`/posts/new/notification`)
+function startPolling() {
+    return timeoutPromise(60000, fetch(`/posts/new/notification`)
     .then(res => res.json())
         .then(data => {
             console.log("New Post");
             console.log(data);
         }));
+}
+
+startPolling();
+  
