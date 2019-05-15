@@ -1,11 +1,16 @@
-const express   = require("express"),
-      Post      = require("../../models/post"),
-      User      = require("../../models/user"),
-      auth      = require("../../middleware/auth"),
+const express       = require("express"),
+      Post          = require("../../models/post"),
+      User          = require("../../models/user"),
+      auth          = require("../../middleware/auth"),
+      EventEmitter  = require("events").EventEmitter,
 
-      router = express.Router();
+      messageBus    = new EventEmitter(),
+      router        = express.Router();
+
+      messageBus.setMaxListeners(100);
 
 router.get("/posts/new", auth.isLogged, (req, res) => {
+    
     res.render("posting/newpost", {user: req.user, isAuth: req.isAuthenticated()});
 });
 
@@ -26,10 +31,25 @@ router.post("/posts/new", auth.isLogged, (req, res) => {
             User.findOne({username: req.user.username}, (err, user) => {
                 user.posts.push(post);
                 user.save();
+                messageBus.emit("message", {
+                    post : post,
+                    user : req.user
+                });
+                res.status(200).end();
             })
+
             res.redirect(`/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}`);
         }
     });
 });
+
+router.get("/posts/new/notification", (req, res) => {
+    let addMessageListener = res => {
+        messageBus.once("message", data => {
+            res.json(data);
+        })
+    }
+    addMessageListener(res);
+})
 
 module.exports = router;

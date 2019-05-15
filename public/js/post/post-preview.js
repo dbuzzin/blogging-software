@@ -34,3 +34,26 @@
     initPreview();
 
 })(); 
+
+
+function timeoutPromise(ms, promise) {
+    return new Promise((resolve, reject) => {
+      const timeoutId = setTimeout(() => {
+        reject(new Error("promise timeout"))
+      }, ms);
+      promise.then(
+        (res) => {
+          clearTimeout(timeoutId);
+          resolve(res);
+        },
+        (err) => {
+          clearTimeout(timeoutId);
+          reject(err);
+        }
+      );
+    })
+  }
+
+  timeoutPromise(10000, fetch(`/posts/new/notification`)
+    .then(res => res.json())
+        .then(data => console.log(data)));

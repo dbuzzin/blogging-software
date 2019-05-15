@@ -1,0 +1,42 @@
+<%- include("../partials/header.ejs", {user: user, isAuth: isAuth}) %>
+
+<div class="ui main text w-70 segment">
+
+    <form id="newPost" class="ui form" autocomplete="off" action="/posts/new" method="POST">
+
+        <div class="field">
+            <input id="titleInput" type="text" name="post[title]" placeholder="Title" required/>
+        </div>
+
+        <div class="field">
+            <div class="div-input" type="text">
+                <input class="tag-input" type="text" placeholder="Add Tag..."/>
+                <input id="hiddenTag" type="hidden" name="post[tags]"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <textarea id="bodyInput" name="post[body]" placeholder="What do you have to say..." required></textarea>
+        </div>
+
+        <button class="ui primary button">Post</button>
+
+    </form>
+
+</div>
+
+<%# PREVIEW %>
+
+<div class="ui raised very padded text w-70 segment">
+
+    <h2 class="ui header" id="previewTitle"></h2>
+    <time id="previewTime"></time>
+    <br /><br />
+    <p id="previewBody"></p>
+
+</div>
+
+<script src="/js/post/tag-input2.js"></script>
+<script src="/js/post/post-preview.js"></script>
+
+<% include ../partials/footer %>

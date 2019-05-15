@@ -6,7 +6,7 @@ const express   = require("express"),
       router = express.Router();
 
 router.get("/login", (req, res) => {
-    res.render("login", {isAuth: req.isAuthenticated()});
+    res.render("users/login", {isAuth: req.isAuthenticated()});
 });
 
 router.post("/login", passport.authenticate("local", {

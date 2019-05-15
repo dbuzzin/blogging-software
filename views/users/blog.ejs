@@ -1,4 +1,15 @@
-<%- include("./partials/header", {user: user, isAuth: isAuth}) %>
+<%- include("../partials/header", {user: user, isAuth: isAuth}) %>
+
+<div class="ui very padded test w-70 segment">
+
+    <% if(thisUser.blogurl !== user.blogurl) { %>
+
+        <a id="followBlog" href="/<%= thisUser.blogurl %>" data-url="<%= thisUser.blogurl %>"><button class="ui button ">Follow</button></a>
+
+    <% }; %>
+
+</div>
+
 
 
 <% posts.reverse().forEach(post => { %> 
@@ -37,6 +48,10 @@
 
 <% }); %>
 
+<% if(thisUser.blogurl !== user.blogurl) { %>
 
+    <script src="/js/user-actions/follow-blog.js"></script>
 
-<% include ./partials/footer %>
+<% }; %>
+
+<% include ../partials/footer %>

@@ -6,7 +6,7 @@ const express   = require("express"),
 
 router.get("/signup", (req, res) => {
 
-    res.render("register", {isAuth: req.isAuthenticated()});
+    res.render("users/register", {isAuth: req.isAuthenticated()});
 
 });
 

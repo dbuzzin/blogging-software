@@ -50,7 +50,7 @@ if(process.env.NODE_ENV === "dev") {
 
 // ROUTES
 
-app.use(require("./routes/landing"));
+
 
 // Posting
 app.use(require("./routes/posting/newpost"));
@@ -66,9 +66,9 @@ app.use(require("./routes/searching/search"));
 app.use(require("./routes/users/register"));
 app.use(require("./routes/users/login"));
 app.use(require("./routes/users/logout"));
-
+app.use(require("./routes/users/feed"));
 app.use(require("./routes/users/blog"));
-
+app.use(require("./routes/users/actions/following"));
 
 app.get("/", (req, res) => {
     res.redirect("/login");

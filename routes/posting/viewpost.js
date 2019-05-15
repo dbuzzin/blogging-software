@@ -27,5 +27,3 @@ router.get("/posts/:year/:month/:day/:title", (req, res) => {
 });
 
 module.exports = router;
-
-// New Branch

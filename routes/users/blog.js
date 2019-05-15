@@ -7,7 +7,7 @@ const express   = require("express"),
 
       router = express.Router();
 
-router.get("/:blog", auth.isLogged, (req, res) => {
+router.get("/blog/:blog", auth.isLogged, (req, res) => {
     
     User.findOne({blogurl: req.params.blog}, (err, user) => {
 
@@ -15,10 +15,10 @@ router.get("/:blog", auth.isLogged, (req, res) => {
             console.log("Error: ", err);
         } 
     
-    }).then(user => {
+    }).then(thisUser => {
 
-        Post.find({_id: { $in: user.posts}}, (err, posts) => {
-            res.render("blog", {posts: posts, user: req.user, isAuth: req.isAuthenticated()});
+        Post.find({_id: { $in: thisUser.posts}}, (err, posts) => {
+            res.render("users/blog", {thisUser: thisUser, posts: posts, user: req.user, isAuth: req.isAuthenticated()});
         });
     });
 
