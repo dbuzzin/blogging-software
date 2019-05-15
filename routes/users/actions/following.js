@@ -4,7 +4,7 @@ const express       = require("express"),
 
       router        = express.Router();
 
-router.put("/:blog", auth.isLogged,  (req, res) => {
+router.put("/blog/:blog", auth.isLogged,  (req, res) => {
     User.findOne({blogurl: req.params.blog}, (err, user) => {
         if(err){
             console.log("Error: ", err)

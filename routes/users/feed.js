@@ -3,40 +3,28 @@ const express   = require("express"),
       auth      = require("../../middleware/auth"),
       Post      = require("../../models/post"),
       User      = require("../../models/user"),
+      events    = require("../handle-notifications"),
 
       router = express.Router();
 
 router.get("/feed", auth.isLogged, (req, res) => {
 
-    // Post.find({}, (err, posts) => {
-
-    //     if(err) {
-    //         console.log("Error: ", err);
-    //     } else {
-    //         res.render("users/feed", {posts: posts, user: req.user, isAuth: req.isAuthenticated()});
-    //     }
-        
-    // });
+    console.log(req.user);
 
     let postArr = [];
 
-    User.find({_id: {$in: req.user.following}}, (err, users) => {
-        
-    }).then(users => {
-        users.forEach(user => {
-            postArr.push(...user.posts);
-        })
-        Post.find({_id: {$in: postArr}}, (err, posts) => {
+    User.find({_id: {$in: req.user.following}})
+        .populate("posts").exec((err, users) => {
             if(err) {
-                console.log("Error: ", err)
+                console.log("Error:", err);
             } else {
-                res.render("users/feed", {posts: posts, user: req.user, isAuth: req.isAuthenticated()});
+                users.forEach(user => {
+                    postArr.push(...user.posts);
+                })
+                res.render("users/feed", {posts: postArr, user: req.user, isAuth: req.isAuthenticated()});
             }
-        })
-    });
-
-    
-
+        });
+        
 });
 
 module.exports = router;

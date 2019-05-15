@@ -1,13 +1,12 @@
 const express       = require("express"),
       Post          = require("../../models/post"),
       User          = require("../../models/user"),
+      Notification  = require("../../models/notification"),
       auth          = require("../../middleware/auth"),
-      EventEmitter  = require("events").EventEmitter,
+      events        = require("../handle-notifications")
 
-      messageBus    = new EventEmitter(),
       router        = express.Router();
 
-      messageBus.setMaxListeners(100);
 
 router.get("/posts/new", auth.isLogged, (req, res) => {
     
@@ -31,10 +30,26 @@ router.post("/posts/new", auth.isLogged, (req, res) => {
             User.findOne({username: req.user.username}, (err, user) => {
                 user.posts.push(post);
                 user.save();
-                messageBus.emit("message", {
-                    type    : "post",
-                    content : post,
-                    user    : req.user
+                Notification.create({
+                    isType    : "Post",
+                    origin  : post,
+                    url     : `/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}`,
+                    user    : user._id
+                }, (err, notif) => {
+                    if(err) {
+                        console.log("Error: ", err);
+                    } else {
+
+                        User.find({_id: {$in: user.followers}}, (err, followers) => {
+                            for(let follower of followers) {
+                                follower.notifications.push(notif);
+                                follower.save();
+                            }
+                        });
+                    }
+                });
+                events.messageBus.emit("notification", {
+                    type    : "post"
                 });
                 res.status(200).end();
             })
@@ -43,14 +58,5 @@ router.post("/posts/new", auth.isLogged, (req, res) => {
         }
     });
 });
-
-router.get("/posts/new/notification", (req, res) => {
-    let addMessageListener = res => {
-        messageBus.once("message", data => {
-            res.json(data);
-        })
-    }
-    addMessageListener(res);
-})
 
 module.exports = router;

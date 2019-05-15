@@ -6,10 +6,14 @@ const express       = require("express"),
       methodOver    = require("method-override"),
       sanitizer     = require("express-sanitizer"),
 
+      events        = require("./routes/handle-notifications"),
+
       //AUTH
       sessions      = require("client-sessions"),
       passport      = require("passport"),
       LocalStrategy = require("passport-local").Strategy;
+
+      seedDB        = require("./seeds");
 
                       require("dotenv").config();
 
@@ -48,9 +52,11 @@ if(process.env.NODE_ENV === "dev") {
     mongoose.connect(`${process.env.DB_HOST}://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds155396.mlab.com:55396/${process.env.DB_NAME}`, {useNewUrlParser: true, useFindAndModify: false});
 }
 
+// seedDB();
+
 // ROUTES
 
-
+app.use(events.router);
 
 // Posting
 app.use(require("./routes/posting/newpost"));

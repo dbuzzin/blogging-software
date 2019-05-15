@@ -23,7 +23,15 @@
         <a class="item" href="/posts/search">Search</a>
         <div class="right menu">
             <% if(isAuth) { %>
-                <a class="item" href="">Username</a>
+            <a id="notifMenu" class="item popup">
+                    Notifications 
+                    <div class="ui label" id="numOfNewNotif">0</div>
+                    <div id="notifList" class="popBox hid">
+                    </div>
+                </a>
+                
+                <a class="item" href="/blog/<%= user.blogurl %>"><%= user.username %></a>
+                
                 <a class="item" href="/logout">Logout</a>
             <% } else { %>
                 <a class="item" href="/logout">Login</a>

@@ -36,34 +36,3 @@
 })(); 
 
 
-function timeoutPromise(ms, promise) {
-    return new Promise((resolve, reject) => {
-        console.log("Polling Started...");
-        const timeoutId = setTimeout(() => {
-            reject(new Error("Promise Timeout"));
-            startPolling();
-        }, ms);
-        promise.then(
-            (res) => {
-            clearTimeout(timeoutId);
-            resolve(res);
-            startPolling();
-            },
-            (err) => {
-            clearTimeout(timeoutId);
-            reject(err);
-            }
-        );
-    })
-};
-
-function startPolling() {
-    return timeoutPromise(60000, fetch(`/posts/new/notification`)
-    .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        }));
-}
-
-startPolling();
-  

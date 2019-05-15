@@ -16,14 +16,14 @@ router.get("/posts/:year/:month/:day/:title", (req, res) => {
     Post.findOne(findPost, (err, post) => {
         if(err) {
             console.log("Error: ", err);
-        }
-    }).then(post => {
+        } else {
             res.render("posting/viewpost", {
                 post        : post,
                 user        : req.user || {},
                 isAuth      : req.isAuthenticated(), 
              });
-    });  
+        }
+    });
 });
 
 module.exports = router;

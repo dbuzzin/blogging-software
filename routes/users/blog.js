@@ -8,19 +8,15 @@ const express   = require("express"),
       router = express.Router();
 
 router.get("/blog/:blog", auth.isLogged, (req, res) => {
-    
-    User.findOne({blogurl: req.params.blog}, (err, user) => {
 
-        if(err) {
-            console.log("Error: ", err);
-        } 
-    
-    }).then(thisUser => {
-
-        Post.find({_id: { $in: thisUser.posts}}, (err, posts) => {
-            res.render("users/blog", {thisUser: thisUser, posts: posts, user: req.user, isAuth: req.isAuthenticated()});
+    User.findOne({blogurl: req.params.blog})
+        .populate("posts").exec((err, user) => {
+            if(err) {
+                console.log("Error:", err);
+            } else {
+                res.render("users/blog", {thisUser: user, posts: user.posts, user: req.user, isAuth: req.isAuthenticated()});
+            }
         });
-    });
 
 });
 

@@ -4,7 +4,7 @@
 
     <% if(thisUser.blogurl !== user.blogurl) { %>
 
-        <a id="followBlog" href="/<%= thisUser.blogurl %>" data-url="<%= thisUser.blogurl %>"><button class="ui button ">Follow</button></a>
+        <a id="followBlog" href="/blog/<%= thisUser.blogurl %>" data-url="<%= thisUser.blogurl %>"><button class="ui button ">Follow</button></a>
 
     <% }; %>
 
@@ -17,7 +17,7 @@
     <div class="ui raised very padded text w-70 segment">
 
         <h2 class="ui header"><%= post.title.titleCase() %></h2>
-        <caption>by <a href="/<%= post.blogurl %>"><%= post.author %></a></caption> - <time><%= post.created.fulldate.formatDate() %></time>
+        <caption>by <a href="/blog/<%= post.blogurl %>"><%= post.author %></a></caption> - <time><%= post.created.fulldate.formatDate() %></time>
         <br /><br />
         <p><%- post.body.substring(0, 3000) %></p>
 

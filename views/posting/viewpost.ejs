@@ -3,7 +3,7 @@
 <div class="ui main very padded text w-70 segment">
 
     <h1><%= post.title.titleCase() %></h1>
-    <caption>by <a href="/<%= post.blogurl %>"><%= post.author %></a></caption> - <time><%= post.created.fulldate.formatDate() %></time>
+    <caption>by <a href="/blog/<%= post.blogurl %>"><%= post.author %></a></caption> - <time><%= post.created.fulldate.formatDate() %></time>
     <br />
     <br />
     <p><%- post.body %></p>

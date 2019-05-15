@@ -70,3 +70,49 @@ body {
 .tag-input:focus .div-input{
     border-color: #85B7D9;
 }
+
+
+.popup {
+    position: relative;
+}
+
+.hid {
+    display: none;
+}
+
+.popBox {
+    position: absolute;
+    height: 100px;
+    background-color: #fff;
+    border: 1px solid rgba(34, 36, 38, 0.1);
+    box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+}
+
+.popBox li {
+    list-style: none;
+}
+
+#notifList {
+    width: max-content;
+    height: max-content;
+    /* padding: 10px; */
+}
+
+#notifList li {
+    padding: 10px 20px;
+}
+
+#notifList > a,
+#notifList > a:link,
+#notifList > a:active,
+#notifList > a:visited {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+#notifList li:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+#notifList li div:first-of-type {
+    margin-bottom: 5px;
+}
