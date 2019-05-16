@@ -3,11 +3,7 @@ const express   = require("express"),
 
 const isLogged = (req, res, next) => {
     if(req.isAuthenticated()) {
-        if(req.route.path !== "/login") {
-            return next();
-        } else {
-            res.redirect("/feed");
-        }
+        return next();
     }
     res.redirect("/login");
 }

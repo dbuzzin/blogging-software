@@ -5,11 +5,15 @@ const express   = require("express"),
 
       router = express.Router();
 
-router.get("/login", auth.isLogged, (req, res) => {
-    res.render("users/login", {isAuth: req.isAuthenticated()});
+router.get("/login", (req, res) => {
+    if(req.isAuthenticated()) {
+        res.redirect("/feed");
+    } else {
+        res.render("users/login", {isAuth: req.isAuthenticated()});
+    }
 });
 
-router.post("/login", auth.isLogged, passport.authenticate("local", {
+router.post("/login", passport.authenticate("local", {
     successRedirect: "/feed",
     failureRedirect: "/login"
 }), (req, res) => {
