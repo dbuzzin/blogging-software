@@ -9,7 +9,7 @@
 - Like / dislike user posts
 - Share on social media (Facebook)
 - Follow blogs and display on feed
-- Notifications (Only currently for posts) - Needs refactor foe efficiency 
+- Notifications (Only currently for posts) - Needs refactor for efficiency 
 - Real-time updates (Only currently for notifications)
 
 ### Future Features 
