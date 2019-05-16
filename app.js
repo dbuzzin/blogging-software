@@ -12,6 +12,8 @@ const express       = require("express"),
       sessions      = require("client-sessions"),
       passport      = require("passport"),
       LocalStrategy = require("passport-local").Strategy;
+      auth          = require("./middleware/auth"),
+
 
       seedDB        = require("./seeds");
 
@@ -28,6 +30,12 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.use(methodOver("_method"));
 app.use(sanitizer());
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 app.use(sessions({
     cookieName  : "session",
@@ -54,7 +62,6 @@ if(process.env.NODE_ENV === "dev") {
 
 // seedDB();
 
-//dfadg
 // ROUTES
 
 app.use(events.router);
@@ -80,6 +87,11 @@ app.use(require("./routes/users/actions/following"));
 app.get("/", (req, res) => {
     res.redirect("/login");
 });
+
+app.all("*", (req, res) => { 
+    res.send("Sorry :( The page you requested doesn't exist.")
+})
+
 
 // START SERVER
 

@@ -23,10 +23,24 @@ router.get("/requests/get-notification-data", auth.isLogged, (req, res) => {
             if(err) {
                 console.log("Error: ", err);
             } else {
-                res.json(notif);
+                let userNotifs = [];
+                for(let getNotif of notif){
+                    if(req.user.following.indexOf(getNotif.user) !== -1) {
+                        userNotifs.push(getNotif);
+                    }
+                }
+                res.json(userNotifs);
             }
         })
 });
+
+router.put("/requests/handle-notifications", auth.isLogged, (req, res) => {
+    for(let notification of req.body) {
+        Notification.findByIdAndUpdate(notification._id, {new: false}).then(notif => {
+            console.log(notif);
+        })
+    }
+})
 
 exports.router      = router;
 exports.messageBus  = messageBus;

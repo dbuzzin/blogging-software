@@ -9,8 +9,6 @@ const express   = require("express"),
 
 router.get("/feed", auth.isLogged, (req, res) => {
 
-    console.log(req.user);
-
     let postArr = [];
 
     User.find({_id: {$in: req.user.following}})
@@ -21,10 +19,13 @@ router.get("/feed", auth.isLogged, (req, res) => {
                 users.forEach(user => {
                     postArr.push(...user.posts);
                 })
+                
                 res.render("users/feed", {posts: postArr, user: req.user, isAuth: req.isAuthenticated()});
             }
         });
         
 });
+
+
 
 module.exports = router;

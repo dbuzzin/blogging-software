@@ -46,12 +46,11 @@ router.post("/posts/new", auth.isLogged, (req, res) => {
                                 follower.save();
                             }
                         });
+                        events.messageBus.emit("notification", notif);
+                        res.status(200).end();
                     }
                 });
-                events.messageBus.emit("notification", {
-                    type    : "post"
-                });
-                res.status(200).end();
+                
             })
 
             res.redirect(`/posts/${post.created.year}/${post.created.month}/${post.created.day}/${post.title.replace(/\s/g, "-")}`);

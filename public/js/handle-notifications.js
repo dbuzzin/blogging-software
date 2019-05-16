@@ -3,12 +3,11 @@
     const notifBtn  = document.querySelector("#notifMenu")
           notifList = document.querySelector("#notifList");
 
-    let notifNum    = document.querySelector("#numOfNewNotif");
-
-    notificationData = {
-        number  : 0,
-
-    }
+    let notifNum    = document.querySelector("#numOfNewNotif"),
+        numNew      = 0,
+        message     = "",
+        list        = "",
+        notifArr    = [];
 
     function timeoutPromise(ms, promise) {
         return new Promise((resolve, reject) => {
@@ -33,40 +32,86 @@
         .then(res => res.json())
             .then(data => {
                 notifNum.classList.add("red");
-                ++parseInt(notifNum.textContent);
+                numNew += 1;
+                notifNum.textContent  = numNew;
+
+                addNotif(data);
+                notifList.innerHTML = list;
+
+                notifArr.push(data)
+
+                openNotifs(notifArr);
             }));
     }
     
     startPolling();
 
-
-    notifBtn.addEventListener("click", () => {
-        fetch("/requests/get-notification-data")
+    fetch("/requests/get-notification-data")
             .then(res => res.json())
                 .then(data => {
-                    let message = "";
-                    let list    = "";
+                    console.log(data);
 
                     for(let notif of data) {
-                        let time    = new Date(notif.origin.created.fulldate),
-                            timeAgo = Math.round((new Date() - time) / 1000 / 60) + "m ago";
-                        if(notif.isType === "Post") {
-                            message = `There is a new ${notif.isType.toLowerCase()} in ${notif.origin.blogurl}`
-                            
-                            let item = `
-                                <a href="${notif.url}">
-                                    <li>
-                                        <div>${message}</div>
-                                        <div>${timeAgo}</div>
-                                    </li>
-                                </a>
-                            `
-                            list += item;
+                        console.log(notif)
+
+                        if(notif.new === true) {
+                            numNew += 1;
+                            notifNum.textContent  = numNew;
+                            console.log(numNew);
                         }
+
+                        if(numNew > 0) {
+                            notifNum.classList.add("red");
+                        } else {
+                            notifNum.classList.remove("red");
+                        }
+
+                        
+                        addNotif(notif);
+                    }
+                    if(list === "") {
+                        list = "<li>You have no new notifications</li>";
                     }
                     notifList.innerHTML = list;
+                    
+                    openNotifs(data);
                 })
-    })
+
+                function addNotif(notif) {
+                    let time    = new Date(notif.origin.created.fulldate),
+                        timeAgo = Math.round((new Date() - time) / 1000 / 60) + "m ago";
+
+                    if(notif.isType === "Post") {
+                        message = `There is a new ${notif.isType.toLowerCase()} in ${notif.origin.blogurl}`
+                        
+                        let item = `
+                            <a href="${notif.url}">
+                                <li>
+                                    <div>${message}</div>
+                                    <div>${timeAgo}</div>
+                                </li>
+                            </a>
+                        `
+                        
+                        list += item;
+                    }
+                }
+
+                function openNotifs(d) {
+                    notifBtn.addEventListener("click", () => {
+                        fetch("/requests/handle-notifications", {
+                            method  : "PUT",
+                            headers : {"Content-Type": "Application/json"},
+                            body    : JSON.stringify(d)
+                        })
+    
+                        notifNum.classList.remove("red");
+                        numNew  = 0;
+                        notifNum.textContent  = numNew;
+                    });
+                }
+                
+    
 
 })();
 

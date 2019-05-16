@@ -14,7 +14,11 @@ const mongoose  = require("mongoose"),
               enum      : ["Post", "User"]
           },
           url           : String, // Url of the origin
-          user          : String  // Who sent the notification
+          user          : String,  // Who sent the notification
+          new           : {
+              type      : Boolean,
+              default   : true
+          }
       });
 
 module.exports = mongoose.model("Notification", notificationSchema);
