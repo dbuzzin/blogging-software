@@ -23,4 +23,5 @@
 - Ratings 
 - Insights (posts, views, comments, popular categories etc...)
 - Related posts from other sources
+- Live chat/messasing
 - More...
