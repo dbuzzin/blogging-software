@@ -29,6 +29,7 @@ router.get("/requests/get-notification-data", auth.isLogged, (req, res) => {
                         userNotifs.push(getNotif);
                     }
                 }
+                // console.log(userNotifs)
                 res.json(userNotifs);
             }
         })
@@ -36,8 +37,10 @@ router.get("/requests/get-notification-data", auth.isLogged, (req, res) => {
 
 router.put("/requests/handle-notifications", auth.isLogged, (req, res) => {
     for(let notification of req.body) {
-        Notification.findByIdAndUpdate(notification._id, {new: false}).then(notif => {
-            console.log(notif);
+        Notification.findByIdAndUpdate(notification._id, {new: false}).then((err, notif) => {
+            if(err) {
+                console.log("Error: ", err)
+            }
         })
     }
 })

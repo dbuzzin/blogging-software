@@ -1,5 +1,7 @@
 String.prototype.titleCase = function() { 
-    return this.replace(/(\b(?=(^[a-z]+|(?!\s)([a-z]{4,})|[a-z]+$))[a-z])/g, str => str.toUpperCase());
+    return this.replace(/^\b\w|\b\w(?=\w{3,})|\b\w(?=\w+$)/g, function(match) {
+        return match.toUpperCase();
+       });
 };
 
 Date.prototype.formatDate = function() {
@@ -16,7 +18,8 @@ Date.prototype.formatDate = function() {
   		minute: "2-digit"
     }).format(this),
 
-    newDate = d.replace(/(?<=\d+)[,]/, ""),
+    newDate = d;
+    // newDate = newDate.replace();
     newTime = t.replace(/(AM|PM)/, "");
 
     return `${newDate} at ${newTime}`;

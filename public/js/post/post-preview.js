@@ -6,7 +6,7 @@
           body          = document.querySelector("#previewBody"),
           time          = document.querySelector("#previewTime");
 
-    let date = new Date;
+    let date = new Date();
 
     time.innerHTML = `${date.formatDate()} (This will update when posted)`;
 

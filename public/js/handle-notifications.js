@@ -31,6 +31,8 @@
         return timeoutPromise((2 * 60 * 1000), fetch(`/requests/handle-notifications`)
         .then(res => res.json())
             .then(data => {
+
+                console.log(data);
                 notifNum.classList.add("red");
                 numNew += 1;
                 notifNum.textContent  = numNew;
